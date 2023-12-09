@@ -9,7 +9,7 @@ public class GeografiGetRequests
 
     private static string AccessToken { get; set; }
 
-    public static async Task<string> GetStopPoints(string endPoint)
+    public static async Task<string> GeografiGetRequest(string endPoint)
     {
         AccessToken = await GenerateAcessToken.GenerateToken();
         using (var httpClient = new HttpClient())

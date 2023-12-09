@@ -5,12 +5,12 @@ using VasttrafikWindows.ViewModels;
 
 namespace VasttrafikWindows.Commands;
 
-public class GeografiGetStopPointsCommand : IRelayCommand
+public class GeografiGetStopAreaCommand : IRelayCommand
 {
     private readonly MainModel _mainModel;
     private readonly MainViewModel _mainViewModel;
 
-    public GeografiGetStopPointsCommand(MainModel mainModel, MainViewModel mainViewModel)
+    public GeografiGetStopAreaCommand(MainModel mainModel, MainViewModel mainViewModel)
     {
         _mainModel = mainModel;
         _mainViewModel = mainViewModel;
@@ -23,10 +23,10 @@ public class GeografiGetStopPointsCommand : IRelayCommand
 
     public async void Execute(object? parameter)
     {
-        var jsonResponse = await GeografiGetRequests.GetStopPoints(_mainViewModel.GeografiEndPointInputString);
-        var stopPoint = Api.Deserializers.GeografiDeserializer.StopPointDeserializer(jsonResponse);
+        var jsonResponse = await GeografiGetRequests.GeografiGetRequest(_mainViewModel.GeografiEndPointInputString);
+        var stopArea = Api.Deserializers.GeografiDeserializer.StopAreaDeserializer(jsonResponse);
 
-        var uniqueStops = stopPoint.stopPoints.DistinctBy(s => s.gid).OrderBy(s => s.name).ToList();
+        var uniqueStops = stopArea.stopAreas.DistinctBy(s => s.gid).OrderBy(s => s.name).ToList();
 
         var uniqueStopsString = string.Empty;
 

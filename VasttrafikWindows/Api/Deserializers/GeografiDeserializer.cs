@@ -10,4 +10,10 @@ public class GeografiDeserializer
         var response = JsonSerializer.Deserialize<GeografiStopPointsResponse>(json);
         return response;
     }
+
+    public static GeografiStopAreaResponse StopAreaDeserializer(string json)
+    {
+        var response = JsonSerializer.Deserialize<GeografiStopAreaResponse>(json);
+        return response;
+    }
 }

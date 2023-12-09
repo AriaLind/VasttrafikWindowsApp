@@ -19,14 +19,5 @@ public class StopPoint
     public Municipality municipality { get; set; }
     public List<TariffZone> tariffZones { get; set; }
     public TransportAuthority transportAuthority { get; set; }
-    public bool isForBoardning { get; set; }
-    public bool isForAlighting { get; set; }
-    public bool isRegularTraffic { get; set; }
-    public bool isFlexibleBusService { get; set; }
-    public bool isFlexibleTaxiService { get; set; }
-    public bool isSpecialVehicleTransportConnectionPoint { get; set; }
-    public Geometry geometry { get; set; }
-    public DateTime validFromDate { get; set; }
-    public DateTime validUpToDate { get; set; }
 }
 

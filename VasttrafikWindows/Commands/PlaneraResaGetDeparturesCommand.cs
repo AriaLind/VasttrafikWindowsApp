@@ -32,7 +32,8 @@ public class PlaneraResaGetDeparturesCommand : IRelayCommand
 
         foreach (var departuresResult in departures.results)
         {
-            timeAndLine += departuresResult.stopPoint.shortName + " ";
+            timeAndLine += departuresResult.serviceJourney.line.name + " ";
+            timeAndLine += departuresResult.serviceJourney.direction + " ";
             timeAndLine += departuresResult.estimatedOtherwisePlannedTime + "\n";
         }
 
