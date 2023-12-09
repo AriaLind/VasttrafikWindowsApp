@@ -2,6 +2,11 @@
 
 public class MainModel
 {
-    public string _apiOutPutString;
-    public string _apiEndPointString;
+    public string _geografiStopPointOutputString;
+    public string _geografiStopPointEndPointString;
+
+    public string _planeraResaDepartuesEndPointString;
+    public string _planeraResaOutputString;
+
+
 }

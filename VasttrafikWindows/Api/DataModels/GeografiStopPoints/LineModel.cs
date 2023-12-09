@@ -1,4 +1,4 @@
-﻿namespace VasttrafikAppTest.Models.DepartureModels;
+﻿namespace VasttrafikWindows.Api.DataModels.GeografiStopPoints;
 
 public class Line
 {

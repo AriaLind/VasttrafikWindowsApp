@@ -1,4 +1,4 @@
-﻿namespace VasttrafikAppTest.Models.Geografi.StopPoints;
+﻿namespace VasttrafikWindows.Api.DataModels.GeografiStopPoints;
 
 public class Links
 {

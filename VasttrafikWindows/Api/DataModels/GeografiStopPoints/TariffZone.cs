@@ -1,6 +1,6 @@
 ﻿using System.Windows.Media;
 
-namespace VasttrafikAppTest.Models.Geografi.StopPoints;
+namespace VasttrafikWindows.Api.DataModels.GeografiStopPoints;
 
 public class TariffZone
 {

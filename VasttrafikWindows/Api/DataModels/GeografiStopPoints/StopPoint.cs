@@ -1,6 +1,6 @@
 ﻿using System.Windows.Media;
 
-namespace VasttrafikAppTest.Models.Geografi.StopPoints;
+namespace VasttrafikWindows.Api.DataModels.GeografiStopPoints;
 
 public class StopPoint
 {
@@ -22,7 +22,7 @@ public class StopPoint
     public bool isFlexibleBusService { get; set; }
     public bool isFlexibleTaxiService { get; set; }
     public bool isSpecialVehicleTransportConnectionPoint { get; set; }
-    public System.Windows.Media.Geometry geometry { get; set; }
+    public Geometry geometry { get; set; }
     public DateTime validFromDate { get; set; }
     public DateTime validUpToDate { get; set; }
 }

@@ -12,21 +12,35 @@ public class MainViewModel : ObservableObject
     public MainViewModel()
     {
         _mainModel = new MainModel();
-        ApiOutputCommand = new GeografiGetCommand(_mainModel, this);
+        GeografiStopPointsOutputCommand = new GeografiGetStopPointsCommand(_mainModel, this);
+        PlaneraResaStopPointsOutputCommand = new PlaneraResaGetDeparturesCommand()
     }
 
 
-    public string EndPointInputString
+    public string GeografiEndPointInputString
     {
-        get => _mainModel._apiEndPointString;
-        set => SetProperty(ref _mainModel._apiEndPointString, value);
+        get => _mainModel._geografiStopPointEndPointString;
+        set => SetProperty(ref _mainModel._geografiStopPointEndPointString, value);
     }
 
-    public string ApiOutputString
+    public string GeografiOutputString
     {
-        get => _mainModel._apiOutPutString;
-        set => SetProperty(ref _mainModel._apiOutPutString, value);
+        get => _mainModel._geografiStopPointOutputString;
+        set => SetProperty(ref _mainModel._geografiStopPointOutputString, value);
     }
 
-    public IRelayCommand ApiOutputCommand { get; set; }
+    public string PlaneraResaEndPointInputString
+    {
+        get => _mainModel._planeraResaDepartuesEndPointString;
+        set => SetProperty(ref _mainModel._planeraResaDepartuesEndPointString, value);
+    }
+
+    public string PlaneraResaOutputString
+    {
+        get => _mainModel._planeraResaOutputString;
+        set => SetProperty(ref _mainModel._planeraResaOutputString, value);
+    }
+
+    public IRelayCommand GeografiStopPointsOutputCommand { get; set; }
+    public IRelayCommand PlaneraResaStopPointsOutputCommand { get; set; }
 }
