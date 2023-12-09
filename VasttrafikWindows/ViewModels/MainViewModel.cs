@@ -19,19 +19,13 @@ public class MainViewModel : ObservableObject
     public string EndPointInputString
     {
         get => _mainModel._apiEndPointString;
-        set
-        {
-            SetProperty(ref _mainModel._apiEndPointString, value);
-        }
+        set => SetProperty(ref _mainModel._apiEndPointString, value);
     }
 
     public string ApiOutputString
     {
         get => _mainModel._apiOutPutString;
-        set
-        {
-            SetProperty(ref _mainModel._apiOutPutString, value);
-        }
+        set => SetProperty(ref _mainModel._apiOutPutString, value);
     }
 
     public IRelayCommand ApiOutputCommand { get; set; }
