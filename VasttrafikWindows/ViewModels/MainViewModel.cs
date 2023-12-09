@@ -13,7 +13,7 @@ public class MainViewModel : ObservableObject
     {
         _mainModel = new MainModel();
         GeografiStopPointsOutputCommand = new GeografiGetStopPointsCommand(_mainModel, this);
-        PlaneraResaStopPointsOutputCommand = new PlaneraResaGetDeparturesCommand()
+        PlaneraResaStopPointsOutputCommand = new PlaneraResaGetDeparturesCommand(_mainModel, this);
     }
 
 
