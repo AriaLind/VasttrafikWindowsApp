@@ -7,17 +7,23 @@ namespace VasttrafikWindows.Commands;
 
 public class GeografiGetCommand : IRelayCommand
 {
-    private readonly MainModel _demoModel;
+    private readonly MainModel _mainModel;
     private readonly MainViewModel _mainViewModel;
+
+    public GeografiGetCommand(MainModel mainModel, MainViewModel mainViewModel)
+    {
+        _mainModel = mainModel;
+        _mainViewModel = mainViewModel;
+    }
 
     public bool CanExecute(object? parameter)
     {
         return true;
     }
 
-    public void Execute(object? parameter)
+    public async void Execute(object? parameter)
     {
-        return GeografiGetRequests.GetStopPoints();
+        _mainViewModel.ApiOutputString = await GeografiGetRequests.GetStopPoints(_mainViewModel.EndPointInputString);
     }
 
     public event EventHandler? CanExecuteChanged;
