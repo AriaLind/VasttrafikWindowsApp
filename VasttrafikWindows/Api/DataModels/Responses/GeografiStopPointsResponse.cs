@@ -1,6 +1,6 @@
-﻿namespace VasttrafikWindows.Api.DataModels.GeografiStopPoints;
+﻿namespace VasttrafikWindows.Api.DataModels.Responses;
 
-public class StopPointsResponse
+public class GeografiStopPointsResponse
 {
     public Links links { get; set; }
     public Properties properties { get; set; }

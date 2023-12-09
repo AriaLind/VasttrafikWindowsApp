@@ -1,10 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using System.Windows.Media;
 using VasttrafikAppTest.VasttrafikAPI;
-using VasttrafikWindows.Api.DataModels.GeografiStopPoints;
 using VasttrafikWindows.Models;
 using VasttrafikWindows.ViewModels;
-using Geometry = System.Windows.Media.Geometry;
 
 namespace VasttrafikWindows.Commands;
 

@@ -1,4 +1,4 @@
-﻿namespace VasttrafikWindows.Api.DataModels.PlaneraResaDepartures;
+﻿namespace VasttrafikWindows.Api.DataModels;
 
 public class Occupancy
 {

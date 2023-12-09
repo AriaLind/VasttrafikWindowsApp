@@ -1,6 +1,6 @@
 ﻿using System.Windows.Media;
 
-namespace VasttrafikWindows.Api.DataModels.GeografiStopPoints;
+namespace VasttrafikWindows.Api.DataModels;
 
 public class StopPoint
 {
@@ -11,6 +11,9 @@ public class StopPoint
     public string name { get; set; }
     public string shortName { get; set; }
     public string abbreviation { get; set; }
+    public string platform { get; set; }
+    public double latitude { get; set; }
+    public double longitude { get; set; }
     public string designation { get; set; }
     public int localNumber { get; set; }
     public Municipality municipality { get; set; }

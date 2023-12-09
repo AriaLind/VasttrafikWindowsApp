@@ -61,11 +61,11 @@
         <Button
             Grid.Row="1"
             Grid.Column="6"
-            Command="{Binding GeografiStopPointsOutputCommand}" />
+            Command="{Binding PlaneraResaStopPointsOutputCommand}" />
         <TextBox
             Grid.Row="1"
             Grid.Column="7"
-            Text="{}" />
+            Text="{Binding PlaneraResaEndPointInputString}" />
         <TextBox
             TextWrapping="Wrap"
             Grid.Row="3"
@@ -74,7 +74,7 @@
             Grid.ColumnSpan="3"
             HorizontalScrollBarVisibility="Auto"
             IsReadOnly="True"
-            Text="{}"
+            Text="{Binding PlaneraResaOutputString}"
             VerticalScrollBarVisibility="Auto" />
     </Grid>
 </UserControl>

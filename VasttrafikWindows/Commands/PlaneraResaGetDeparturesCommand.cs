@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 using CommunityToolkit.Mvvm.Input;
 using VasttrafikAppTest.VasttrafikAPI;
+using VasttrafikWindows.Api.Deserializers;
 using VasttrafikWindows.Models;
 using VasttrafikWindows.ViewModels;
 
@@ -25,7 +26,17 @@ public class PlaneraResaGetDeparturesCommand : IRelayCommand
     public async void Execute(object? parameter)
     {
         var jsonResponse = await PlaneraResaGetRequest.GetStopAreaDepartures(_mainViewModel.PlaneraResaEndPointInputString);
-        // TO-DO Deserialize jsonResponse
+        var departures = PlaneraResaDeserialization.DeparturesDeserializer(jsonResponse);
+
+        var timeAndLine = string.Empty;
+
+        foreach (var departuresResult in departures.results)
+        {
+            timeAndLine += departuresResult.stopPoint.shortName + " ";
+            timeAndLine += departuresResult.estimatedOtherwisePlannedTime + "\n";
+        }
+
+        _mainViewModel.PlaneraResaOutputString = timeAndLine;
     }
 
     public event EventHandler? CanExecuteChanged;

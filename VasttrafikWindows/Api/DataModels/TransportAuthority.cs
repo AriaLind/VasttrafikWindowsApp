@@ -1,4 +1,4 @@
-﻿namespace VasttrafikWindows.Api.DataModels.GeografiStopPoints;
+﻿namespace VasttrafikWindows.Api.DataModels;
 
 public class TransportAuthority
 {

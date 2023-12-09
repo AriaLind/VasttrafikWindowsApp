@@ -1,6 +1,6 @@
-﻿namespace VasttrafikWindows.Api.DataModels.PlaneraResaDepartures;
+﻿namespace VasttrafikWindows.Api.DataModels.Responses;
 
-public class PlaneraResaResponse
+public class PlaneraResaDeparturesResponse
 {
     public List<Result> results { get; set; }
     public Pagination pagination { get; set; }

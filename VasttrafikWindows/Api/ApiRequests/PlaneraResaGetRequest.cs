@@ -11,7 +11,8 @@ public class PlaneraResaGetRequest
 
     public static async Task<string> GetStopAreaDepartures(string stopAreaGid)
     {
-        var endPoint = $"/stop-areas/{stopAreaGid}/departures";
+        string currentDateTime = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffZ");
+        var endPoint = $"/stop-areas/{stopAreaGid}/departures?startDateTime={currentDateTime}";
         AccessToken = await GenerateAcessToken.GenerateToken();
         using (var httpClient = new HttpClient())
         {
@@ -22,11 +23,11 @@ public class PlaneraResaGetRequest
             if (apiResponse.IsSuccessStatusCode)
             {
                 var apiResponseContent = await apiResponse.Content.ReadAsStringAsync();
-                return $"API Response: {apiResponseContent}";
+                return apiResponseContent;
             }
             else
             {
-                return $"Error making API request: {apiResponse.StatusCode}";
+                return apiResponse.StatusCode.ToString();
             }
         }
     }
