@@ -1,4 +1,7 @@
-﻿namespace VasttrafikWindows.Models;
+﻿using System.Collections.ObjectModel;
+using VasttrafikWindows.Api.DataModels.Responses;
+
+namespace VasttrafikWindows.Models;
 
 public class MainModel
 {
@@ -8,5 +11,6 @@ public class MainModel
     public string _planeraResaDepartuesEndPointString;
     public string _planeraResaOutputString;
 
+    public ObservableCollection<GeografiStopAreaResponse> _geografiStopAreaResponseCollection;
 
 }
