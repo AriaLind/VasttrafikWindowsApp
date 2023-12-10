@@ -7,13 +7,13 @@ namespace VasttrafikWindows.Commands;
 
 public class GeografiGetStopAreaCommand : IRelayCommand
 {
-    private readonly MainModel _mainModel;
-    private readonly MainViewModel _mainViewModel;
+    private readonly PrimaryModel _primaryModel;
+    private readonly PrimaryViewModel _primaryViewModel;
 
-    public GeografiGetStopAreaCommand(MainModel mainModel, MainViewModel mainViewModel)
+    public GeografiGetStopAreaCommand(PrimaryModel primaryModel, PrimaryViewModel primaryViewModel)
     {
-        _mainModel = mainModel;
-        _mainViewModel = mainViewModel;
+        _primaryModel = primaryModel;
+        _primaryViewModel = primaryViewModel;
     }
 
     public bool CanExecute(object? parameter)
@@ -23,7 +23,7 @@ public class GeografiGetStopAreaCommand : IRelayCommand
 
     public async void Execute(object? parameter)
     {
-        var jsonResponse = await GeografiGetRequests.GeografiGetRequest(_mainViewModel.GeografiEndPointInputString);
+        var jsonResponse = await GeografiGetRequests.GeografiGetRequest(_primaryViewModel.GeografiEndPointInputString);
         var stopArea = Api.Deserializers.GeografiDeserializer.StopAreaDeserializer(jsonResponse);
 
         var uniqueStops = stopArea.stopAreas.DistinctBy(s => s.gid).OrderBy(s => s.name).ToList();
@@ -35,7 +35,7 @@ public class GeografiGetStopAreaCommand : IRelayCommand
             uniqueStopsString += $"Name: {stop.name} gid: {stop.gid}\n";
         }
 
-        _mainViewModel.GeografiOutputString = uniqueStopsString;
+        _primaryViewModel.GeografiOutputString = uniqueStopsString;
     }
 
     public event EventHandler? CanExecuteChanged;

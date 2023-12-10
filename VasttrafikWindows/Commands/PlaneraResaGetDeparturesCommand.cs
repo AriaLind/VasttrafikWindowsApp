@@ -9,13 +9,13 @@ namespace VasttrafikWindows.Commands;
 
 public class PlaneraResaGetDeparturesCommand : IRelayCommand
 {
-    private readonly MainModel _mainModel;
-    private readonly MainViewModel _mainViewModel;
+    private readonly PrimaryModel _primaryModel;
+    private readonly PrimaryViewModel _primaryViewModel;
 
-    public PlaneraResaGetDeparturesCommand(MainModel mainModel, MainViewModel mainViewModel)
+    public PlaneraResaGetDeparturesCommand(PrimaryModel primaryModel, PrimaryViewModel primaryViewModel)
     {
-        _mainModel = mainModel;
-        _mainViewModel = mainViewModel;
+        _primaryModel = primaryModel;
+        _primaryViewModel = primaryViewModel;
     }
 
     public bool CanExecute(object? parameter)
@@ -25,7 +25,7 @@ public class PlaneraResaGetDeparturesCommand : IRelayCommand
 
     public async void Execute(object? parameter)
     {
-        var jsonResponse = await PlaneraResaGetRequest.GetStopAreaDepartures(_mainViewModel.PlaneraResaEndPointInputString);
+        var jsonResponse = await PlaneraResaGetRequest.GetStopAreaDepartures(_primaryViewModel.PlaneraResaEndPointInputString);
         var departures = PlaneraResaDeserialization.DeparturesDeserializer(jsonResponse);
 
         var timeAndLine = string.Empty;
@@ -37,7 +37,7 @@ public class PlaneraResaGetDeparturesCommand : IRelayCommand
             timeAndLine += departuresResult.estimatedOtherwisePlannedTime + "\n";
         }
 
-        _mainViewModel.PlaneraResaOutputString = timeAndLine;
+        _primaryViewModel.PlaneraResaOutputString = timeAndLine;
     }
 
     public event EventHandler? CanExecuteChanged;

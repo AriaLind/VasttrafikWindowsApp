@@ -11,6 +11,6 @@
     Height="450"
     mc:Ignorable="d">
     <Grid>
-        <views:MainView />
+        <views:PrimaryView />
     </Grid>
 </Window>

@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace VasttrafikWindows.Views
 {
     /// <summary>
-    /// Interaction logic for MainView.xaml
+    /// Interaction logic for PrimaryView.xaml
     /// </summary>
-    public partial class MainView : UserControl
+    public partial class PrimaryView : UserControl
     {
-        public MainView()
+        public PrimaryView()
         {
             InitializeComponent();
         }
