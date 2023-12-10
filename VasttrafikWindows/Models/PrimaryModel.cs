@@ -15,16 +15,17 @@ public class PrimaryModel
     public string _planeraResaDepartuesEndPointString;
     public string _planeraResaOutputString;
 
-    public ObservableCollection<StopArea> _geografiStopAreaCollection = new();
+    public ObservableCollection<StopArea> GeografiStopAreaCollection = new();
 
     public async void InitializeStopAreaCollection()
     {
         var stopAreas = await GeografiGetRequests.GeografiGetRequest("/StopAreas");
         var stopAreasDeserialized = GeografiDeserializer.StopAreaDeserializer(stopAreas);
+        var distinctStopAreas = stopAreasDeserialized.stopAreas.GroupBy(s => s.gid).Select(g => g.First());
 
-        foreach (var stopArea in stopAreasDeserialized.stopAreas)
+        foreach (var stopArea in distinctStopAreas)
         {
-            _geografiStopAreaCollection.Add(stopArea);
+            GeografiStopAreaCollection.Add(stopArea);
         }
     }
 

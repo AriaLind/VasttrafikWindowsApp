@@ -53,8 +53,8 @@ public class PrimaryViewModel : ObservableObject
 
     public ObservableCollection<StopArea> StopAreaCollection
     {
-        get => _primaryModel._geografiStopAreaCollection;
-        set => _primaryModel._geografiStopAreaCollection = value;
+        get => _primaryModel.GeografiStopAreaCollection;
+        set => _primaryModel.GeografiStopAreaCollection = value;
     }
 
     public IRelayCommand GeografiStopPointsOutputCommand { get; set; }

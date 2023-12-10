@@ -16,7 +16,8 @@ public class GeografiGetRequests
         {
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken);
 
-            var apiResponse = await httpClient.GetAsync(Url + endPoint);
+            var apiResponse = await httpClient.GetAsync(
+                $"{Url}{endPoint}?includeTariffZones=false&includeTransportAuthority=false&includeMunicipality=false&includeGeometry=false");
 
             if (apiResponse.IsSuccessStatusCode)
             {
