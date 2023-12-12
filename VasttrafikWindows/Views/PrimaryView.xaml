@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:VasttrafikWindows.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:viewModels="clr-namespace:VasttrafikWindows.ViewModels"
     d:DataContext="{d:DesignInstance viewModels:PrimaryViewModel}"
     d:DesignHeight="450"
@@ -40,29 +41,36 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="20" />
         </Grid.ColumnDefinitions>
-        <ListView 
+        <ListView
             Grid.Row="3"
             Grid.RowSpan="6"
             Grid.Column="2"
             Grid.ColumnSpan="3"
-            ItemsSource="{Binding StopAreaCollection}">
+            Name="AllStopsListView"
+            ItemsSource="{Binding StopAreaCollection}"
+            SelectedItem="{Binding SelectedStopArea}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding name}"></GridViewColumn>
-                    <GridViewColumn Header="Gid" DisplayMemberBinding="{Binding  gid}"></GridViewColumn>
-                    <GridViewColumn Header="Number" DisplayMemberBinding="{Binding number}"></GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding name}" Header="Name" />
+                    <GridViewColumn DisplayMemberBinding="{Binding gid}" Header="Gid" />
+                    <GridViewColumn DisplayMemberBinding="{Binding number}" Header="Number" />
                 </GridView>
             </ListView.View>
         </ListView>
-        <TextBox
-            TextWrapping="Wrap"
+        <ListView
             Grid.Row="3"
             Grid.RowSpan="6"
             Grid.Column="6"
             Grid.ColumnSpan="3"
-            HorizontalScrollBarVisibility="Auto"
-            IsReadOnly="True"
-            Text="{Binding PlaneraResaOutputString}"
-            VerticalScrollBarVisibility="Auto" />
+            ItemsSource="{Binding SelectedStopAreaDepartures}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding serviceJourney.line.name}" Header="Name" />
+                    <GridViewColumn DisplayMemberBinding="{Binding serviceJourney.direction}" Header="Direction" />
+                    <GridViewColumn DisplayMemberBinding="{Binding estimatedTime}" Header="Departure" />
+                    <GridViewColumn DisplayMemberBinding="{Binding serviceJourney.gid}" Header="Gid" />
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </UserControl>

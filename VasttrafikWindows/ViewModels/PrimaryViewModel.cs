@@ -45,7 +45,7 @@ public class PrimaryViewModel : ObservableObject
         set => SetProperty(ref _primaryModel._planeraResaDepartuesEndPointString, value);
     }
 
-    public string PlaneraResaOutputString
+    public string DeparturesString
     {
         get => _primaryModel._planeraResaOutputString;
         set => SetProperty(ref _primaryModel._planeraResaOutputString, value);
@@ -57,6 +57,35 @@ public class PrimaryViewModel : ObservableObject
         set => _primaryModel.GeografiStopAreaCollection = value;
     }
 
+    public StopArea SelectedStopArea
+    {
+        get => _primaryModel._selectedStopArea;
+        set
+        {
+            SetProperty(ref _primaryModel._selectedStopArea, value);
+            ShowDepartures();
+        } 
+    }
+
+    public List<Result> SelectedStopAreaDepartures
+    {
+        get => _primaryModel._selectedStopAreaDepartures;
+        set => SetProperty(ref _primaryModel._selectedStopAreaDepartures, value);
+    }
+
+    public async void ShowDepartures()
+    {
+        var jsonResponse = await PlaneraResaGetRequest.GetStopAreaDepartures(SelectedStopArea.gid);
+        var departuresResponse = PlaneraResaDeserialization.DeparturesDeserializer(jsonResponse);
+
+        SelectedStopAreaDepartures = new List<Result>();
+        foreach (var departure in departuresResponse.results)
+        {
+            SelectedStopAreaDepartures.Add(departure);
+        }
+    }
+
+    public IRelayCommand ShowDepartureCommand { get; set; }
     public IRelayCommand GeografiStopPointsOutputCommand { get; set; }
     public IRelayCommand PlaneraResaStopPointsOutputCommand { get; set; }
 }

@@ -37,7 +37,7 @@ public class PlaneraResaGetDeparturesCommand : IRelayCommand
             timeAndLine += departuresResult.estimatedOtherwisePlannedTime + "\n";
         }
 
-        _primaryViewModel.PlaneraResaOutputString = timeAndLine;
+        _primaryViewModel.DeparturesString = timeAndLine;
     }
 
     public event EventHandler? CanExecuteChanged;

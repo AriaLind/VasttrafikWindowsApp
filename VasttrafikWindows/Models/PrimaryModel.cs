@@ -4,6 +4,7 @@ using VasttrafikWindows.Api.DataModels;
 using VasttrafikWindows.Api.DataModels.Responses;
 using VasttrafikWindows.Api.Deserializers;
 using VasttrafikWindows.Commands;
+using VasttrafikWindows.ViewModels;
 
 namespace VasttrafikWindows.Models;
 
@@ -14,6 +15,9 @@ public class PrimaryModel
 
     public string _planeraResaDepartuesEndPointString;
     public string _planeraResaOutputString;
+
+    public StopArea _selectedStopArea;
+    public List<Result> _selectedStopAreaDepartures;
 
     public ObservableCollection<StopArea> GeografiStopAreaCollection = new();
 
@@ -28,5 +32,7 @@ public class PrimaryModel
             GeografiStopAreaCollection.Add(stopArea);
         }
     }
+
+    
 
 }
