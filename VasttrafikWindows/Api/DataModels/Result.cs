@@ -7,6 +7,8 @@ public class Result
     public StopPoint stopPoint { get; set; }
     public string plannedTime { get; set; }
     public string estimatedTime { get; set; }
+    public string formattedDepartureTime { get; set; }
+    public string formattedMinutesSecondsUntilDeparture { get; set; }
     public string estimatedOtherwisePlannedTime { get; set; }
     public bool isCancelled { get; set; }
     public bool isPartCancelled { get; set; }

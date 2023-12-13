@@ -1,4 +1,6 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
 using VasttrafikAppTest.VasttrafikAPI;
 using VasttrafikWindows.Api.DataModels;
@@ -74,6 +76,27 @@ public class PrimaryViewModel : ObservableObject
         if (departuresResponse == null)
         {
             return;
+        }
+
+        foreach (var departure in departuresResponse.results)
+        {
+            if (DateTime.TryParse(departure.estimatedOtherwisePlannedTime, out var estTime))
+            {
+                departure.formattedDepartureTime = estTime.ToString("HH:mm");
+                var estimatedTimeTimeSpan = estTime - DateTime.Now;
+                if (estimatedTimeTimeSpan.TotalSeconds > 0)
+                {
+                    departure.formattedMinutesSecondsUntilDeparture = estimatedTimeTimeSpan.ToString("mm':'ss");
+                }
+                else
+                {
+                    departure.formattedMinutesSecondsUntilDeparture = "Departed";
+                }
+            }
+            else
+            {
+                MessageBox.Show("Error parsing datetime.");
+            }
         }
         SelectedStopAreaDepartures = new ObservableCollection<Result>();
         foreach (var departure in departuresResponse.results)
