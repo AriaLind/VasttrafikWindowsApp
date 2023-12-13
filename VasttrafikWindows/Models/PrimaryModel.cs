@@ -23,12 +23,18 @@ public class PrimaryModel
     {
         var stopAreas = await GeografiGetRequests.GeografiGetRequest("/StopAreas");
         var stopAreasDeserialized = GeografiDeserializer.StopAreaDeserializer(stopAreas);
-        var distinctStopAreas = stopAreasDeserialized.stopAreas.GroupBy(s => s.gid).Select(g => g.First());
+        var distinctStopAreas = stopAreasDeserialized.stopAreas.GroupBy(s => s.gid).Select(g => g.First()).ToList();
 
-        foreach (var stopArea in distinctStopAreas)
-        {
-            GeografiStopAreaCollection.Add(stopArea);
-        }
+        GeografiStopAreaCollection = new ObservableCollection<StopArea>(distinctStopAreas);
+    }
+
+    public async Task<List<StopArea>> RefreshFilteredStopAreaList()
+    {
+        var stopAreas = await GeografiGetRequests.GeografiGetRequest("/StopAreas");
+        var stopAreasDeserialized = GeografiDeserializer.StopAreaDeserializer(stopAreas);
+        var distinctStopAreas = stopAreasDeserialized.stopAreas.GroupBy(s => s.gid).Select(g => g.First()).ToList();
+
+        return distinctStopAreas;
     }
 
     public ObservableCollection<StopArea> FilterStops()

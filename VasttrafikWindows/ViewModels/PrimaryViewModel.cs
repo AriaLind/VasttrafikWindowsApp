@@ -15,8 +15,8 @@ public class PrimaryViewModel : ObservableObject
     public PrimaryViewModel()
     {
         _primaryModel = new PrimaryModel();
-        FilteredStopAreas = new ObservableCollection<StopArea>();
         _primaryModel.InitializeStopAreaCollection();
+        RefreshFilteredStopAreas();
     }
 
     public string SearchBoxText
@@ -60,6 +60,11 @@ public class PrimaryViewModel : ObservableObject
     {
         get => _primaryModel._selectedStopAreaDepartures;
         set => SetProperty(ref _primaryModel._selectedStopAreaDepartures, value);
+    }
+
+    public async void RefreshFilteredStopAreas()
+    {
+        FilteredStopAreas = new ObservableCollection<StopArea>(await _primaryModel.RefreshFilteredStopAreaList());
     }
 
     public async void ShowDepartures()
