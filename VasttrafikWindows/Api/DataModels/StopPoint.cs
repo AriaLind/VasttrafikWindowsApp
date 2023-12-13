@@ -1,6 +1,4 @@
-﻿using System.Windows.Media;
-
-namespace VasttrafikWindows.Api.DataModels;
+﻿namespace VasttrafikWindows.Api.DataModels;
 
 public class StopPoint
 {

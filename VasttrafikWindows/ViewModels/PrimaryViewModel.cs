@@ -1,11 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using VasttrafikAppTest.VasttrafikAPI;
 using VasttrafikWindows.Api.DataModels;
 using VasttrafikWindows.Api.DataModels.Responses;
 using VasttrafikWindows.Api.Deserializers;
-using VasttrafikWindows.Commands;
 using VasttrafikWindows.Models;
 
 namespace VasttrafikWindows.ViewModels;
@@ -14,48 +12,39 @@ public class PrimaryViewModel : ObservableObject
 {
     private readonly PrimaryModel _primaryModel;
 
-    List<GeografiStopAreaResponse> _stopAreas;
-
     public PrimaryViewModel()
     {
         _primaryModel = new PrimaryModel();
-
+        FilteredStopAreas = new ObservableCollection<StopArea>();
         _primaryModel.InitializeStopAreaCollection();
-
-        GeografiStopPointsOutputCommand = new GeografiGetStopAreaCommand(_primaryModel, this);
-        PlaneraResaStopPointsOutputCommand = new PlaneraResaGetDeparturesCommand(_primaryModel, this);
-        
     }
 
-    public string GeografiEndPointInputString
+    public string SearchBoxText
     {
-        get => _primaryModel._geografiStopPointEndPointString;
-        set => SetProperty(ref _primaryModel._geografiStopPointEndPointString, value);
+        get => _primaryModel._searchBoxText;
+        set
+        {
+            SetProperty(ref _primaryModel._searchBoxText, value);
+            FilteredStopAreas = _primaryModel.FilterStops();
+        } 
     }
 
-    public string GeografiOutputString
+    private ObservableCollection<StopArea> _filteredStopAreas;
+
+    public ObservableCollection<StopArea> FilteredStopAreas
     {
-        get => _primaryModel._geografiStopPointOutputString;
-        set => SetProperty(ref _primaryModel._geografiStopPointOutputString, value);
+        get => _filteredStopAreas;
+        set
+        {
+            SetProperty(ref _filteredStopAreas, value);
+        } 
     }
 
-    public string PlaneraResaEndPointInputString
-    {
-        get => _primaryModel._planeraResaDepartuesEndPointString;
-        set => SetProperty(ref _primaryModel._planeraResaDepartuesEndPointString, value);
-    }
-
-    public string DeparturesString
-    {
-        get => _primaryModel._planeraResaOutputString;
-        set => SetProperty(ref _primaryModel._planeraResaOutputString, value);
-    }
-
-    public ObservableCollection<StopArea> StopAreaCollection
-    {
-        get => _primaryModel.GeografiStopAreaCollection;
-        set => _primaryModel.GeografiStopAreaCollection = value;
-    }
+    //public ObservableCollection<StopArea> StopAreaCollection
+    //{
+    //    get => _primaryModel.GeografiStopAreaCollection;
+    //    set => SetProperty(ref _primaryModel.GeografiStopAreaCollection, value);
+    //}
 
     public StopArea SelectedStopArea
     {
@@ -67,7 +56,7 @@ public class PrimaryViewModel : ObservableObject
         } 
     }
 
-    public List<Result> SelectedStopAreaDepartures
+    public ObservableCollection<Result> SelectedStopAreaDepartures
     {
         get => _primaryModel._selectedStopAreaDepartures;
         set => SetProperty(ref _primaryModel._selectedStopAreaDepartures, value);
@@ -77,15 +66,17 @@ public class PrimaryViewModel : ObservableObject
     {
         var jsonResponse = await PlaneraResaGetRequest.GetStopAreaDepartures(SelectedStopArea.gid);
         var departuresResponse = PlaneraResaDeserialization.DeparturesDeserializer(jsonResponse);
-
-        SelectedStopAreaDepartures = new List<Result>();
+        if (departuresResponse == null)
+        {
+            return;
+        }
+        SelectedStopAreaDepartures = new ObservableCollection<Result>();
         foreach (var departure in departuresResponse.results)
         {
             SelectedStopAreaDepartures.Add(departure);
         }
     }
 
-    public IRelayCommand ShowDepartureCommand { get; set; }
-    public IRelayCommand GeografiStopPointsOutputCommand { get; set; }
-    public IRelayCommand PlaneraResaStopPointsOutputCommand { get; set; }
+    //public IRelayCommand GeografiStopPointsOutputCommand { get; set; }
+    //public IRelayCommand PlaneraResaStopPointsOutputCommand { get; set; }
 }

@@ -3,9 +3,9 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:VasttrafikWindows.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:viewModels="clr-namespace:VasttrafikWindows.ViewModels"
     d:DataContext="{d:DesignInstance viewModels:PrimaryViewModel}"
     d:DesignHeight="450"
@@ -42,12 +42,12 @@
             <ColumnDefinition Width="20" />
         </Grid.ColumnDefinitions>
         <ListView
+            Name="AllStopsListView"
             Grid.Row="3"
             Grid.RowSpan="6"
             Grid.Column="2"
             Grid.ColumnSpan="3"
-            Name="AllStopsListView"
-            ItemsSource="{Binding StopAreaCollection}"
+            ItemsSource="{Binding FilteredStopAreas, UpdateSourceTrigger=PropertyChanged}"
             SelectedItem="{Binding SelectedStopArea}">
             <ListView.View>
                 <GridView>
@@ -72,5 +72,14 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <StackPanel
+            Grid.Row="2"
+            Grid.Column="2"
+            Grid.ColumnSpan="3"
+            VerticalAlignment="Bottom">
+            <Label Height="auto" Content="Search:" />
+            <TextBox MinHeight="20" Text="{Binding SearchBoxText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        </StackPanel>
+
     </Grid>
 </UserControl>

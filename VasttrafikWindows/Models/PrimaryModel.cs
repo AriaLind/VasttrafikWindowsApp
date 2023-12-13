@@ -1,26 +1,24 @@
 ﻿using System.Collections.ObjectModel;
 using VasttrafikAppTest.VasttrafikAPI;
 using VasttrafikWindows.Api.DataModels;
-using VasttrafikWindows.Api.DataModels.Responses;
 using VasttrafikWindows.Api.Deserializers;
-using VasttrafikWindows.Commands;
-using VasttrafikWindows.ViewModels;
 
 namespace VasttrafikWindows.Models;
 
 public class PrimaryModel
 {
-    public string _geografiStopPointOutputString;
-    public string _geografiStopPointEndPointString;
-
-    public string _planeraResaDepartuesEndPointString;
-    public string _planeraResaOutputString;
-
     public StopArea _selectedStopArea;
-    public List<Result> _selectedStopAreaDepartures;
+    public ObservableCollection<Result> _selectedStopAreaDepartures;
+    public ObservableCollection<StopArea> _filteredStopAreas = new();
 
-    public ObservableCollection<StopArea> GeografiStopAreaCollection = new();
+    public string _searchBoxText;
 
+    public ObservableCollection<StopArea> GeografiStopAreaCollection { get; set; }
+
+    public PrimaryModel()
+    {
+        GeografiStopAreaCollection = new();
+    }
     public async void InitializeStopAreaCollection()
     {
         var stopAreas = await GeografiGetRequests.GeografiGetRequest("/StopAreas");
@@ -33,6 +31,16 @@ public class PrimaryModel
         }
     }
 
-    
+    public ObservableCollection<StopArea> FilterStops()
+    {
+        if (_searchBoxText == null || _searchBoxText == string.Empty)
+        {
+            return _filteredStopAreas = new ObservableCollection<StopArea>(GeografiStopAreaCollection);
+        }
+        var filteredStopAreas = GeografiStopAreaCollection.Where(s => s.name.ToLower().Contains(_searchBoxText.ToLower())).ToList();
+
+        // Create a new instance of _filteredStopAreas and add the filtered items
+        return _filteredStopAreas = new ObservableCollection<StopArea>(filteredStopAreas);
+    }
 
 }

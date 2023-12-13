@@ -7,6 +7,10 @@ public class PlaneraResaDeserialization
 {
     public static PlaneraResaDeparturesResponse DeparturesDeserializer(string json)
     {
+        if (!json.StartsWith("{"))
+        {
+            return null;
+        }
         var response = JsonSerializer.Deserialize<PlaneraResaDeparturesResponse>(json);
         return response;
     }
