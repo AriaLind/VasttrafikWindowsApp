@@ -68,7 +68,7 @@
                     <GridViewColumn DisplayMemberBinding="{Binding serviceJourney.line.name}" Header="Name" />
                     <GridViewColumn DisplayMemberBinding="{Binding serviceJourney.direction}" Header="Direction" />
                     <GridViewColumn DisplayMemberBinding="{Binding formattedDepartureTime}" Header="Departure time" />
-                    <GridViewColumn DisplayMemberBinding="{Binding formattedMinutesSecondsUntilDeparture}" Header="Departure in Minutes/Seconds" />
+                    <GridViewColumn DisplayMemberBinding="{Binding formattedMinutesSecondsUntilDeparture}" Header="Time Left in Minutes/Seconds" />
                     <GridViewColumn DisplayMemberBinding="{Binding serviceJourney.gid}" Header="Gid" />
                 </GridView>
             </ListView.View>
