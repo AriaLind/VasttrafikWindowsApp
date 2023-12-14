@@ -14,9 +14,9 @@ public class PrimaryViewModel : ObservableObject
 {
     private readonly PrimaryModel _primaryModel;
 
-    public PrimaryViewModel()
+    public PrimaryViewModel(PrimaryModel primaryModel)
     {
-        _primaryModel = new PrimaryModel();
+        _primaryModel = primaryModel;
         _primaryModel.InitializeStopAreaCollection();
         RefreshFilteredStopAreas();
     }
